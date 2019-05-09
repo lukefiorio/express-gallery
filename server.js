@@ -90,7 +90,7 @@ passport.use(
 // create session for user & send cookie
 passport.serializeUser(function(user, done) {
   console.log('serializing');
-  return done(null, { id: user.id, username: user.username });
+  return done(null, { id: user.id, username: user.username, role: user.role });
 });
 
 // will fire if session id/user (in session storage) + cookie (user's) && outside of public route
@@ -103,6 +103,7 @@ passport.deserializeUser(function(user, done) {
     done(null, {
       id: user.id,
       username: user.username,
+      role: user.role,
     });
   });
 });

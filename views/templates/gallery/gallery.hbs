@@ -13,6 +13,13 @@
   {{> nav}}
   <div id="content">
     <img class="galleryFeature" src="{{features.link}}">
+
+    <a href="/gallery/{{features.id}}/edit">Modify</a>
+
+    <form action="/gallery/{{features.id}}?_method=DELETE" method="post">
+      <button type="submit">Delete</button>
+    </form>
+
     <p>Posted by: {{features.users.username}}</p>
     <div id="subContent">
       {{#each galleries}}

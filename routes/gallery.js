@@ -8,7 +8,6 @@ const guard = require('../middleware/guard');
 router
   .route('/')
   .get((req, res) => {
-    // use this in the /id route
     new Gallery()
       .query((qb) => {
         // sort new photos to the top
@@ -26,8 +25,8 @@ router
       });
   })
   .post((req, res) => {
-    knex('galleries')
-      .insert({
+    new Gallery()
+      .save({
         title: req.body.title,
         author: req.body.author,
         link: req.body.link,
@@ -35,6 +34,7 @@ router
         user_id: req.user.id,
       })
       .then((result) => {
+        console.log('Successful post');
         return res.redirect('/gallery');
       });
   });
@@ -84,8 +84,6 @@ router
     });
   })
   .put((req, res) => {
-    console.log(req.body);
-
     let updateObj = {};
     if (req.body.title) {
       updateObj.title = req.body.title;
@@ -102,33 +100,23 @@ router
 
     if (Object.keys(updateObj).length === 0) {
       console.log('No field values were provided');
-      return res.redirect(`/products/${id}/edit`);
+      return res.redirect(`/gallery/${id}/edit`);
     }
 
     // MUST guard against non-owners editing a photo
-    updateObj.id = Number(req.params.id);
     updateObj.user_id = req.user.id;
-    console.log(updateObj);
 
-    Gallery.where({ id: req.params.id })
-      .save(updateObj)
-      .then((result) => {
-        console.log('Successful edit');
-        return res.redirect(`/products/${id}`);
-      });
-    // new Gallery(updateObj)
-
-    // return res.send('update a gallery photo');
-
-    // Gallery.where({ id: req.params.id })
-    // .fetch({ withRelated: ['users'] })
-    // .then((result) => {
-    //   const photoObj = result.toJSON();
-    //   return res.render('templates/gallery/edit', photoObj);
-    // });
+    new Gallery('id', req.params.id).save(updateObj).then((result) => {
+      console.log('Successful edit');
+      return res.redirect(`/gallery/${req.params.id}`);
+    });
   })
   .delete((req, res) => {
-    res.send('delete a gallery photo');
+    Gallery.where({ id: req.params.id })
+      .destroy()
+      .then((result) => {
+        return res.redirect('/gallery');
+      });
   });
 
 router.route('/:id/edit').get((req, res) => {
