@@ -1,11 +1,13 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('galleries', (table) => {
     table.increments();
+    table.text('title').notNull();
     table.text('author').notNull();
     table.text('link').notNull();
     table.text('description').notNull();
     table
       .integer('user_id')
+      .notNull()
       .references('id')
       .inTable('users')
       .onDelete('CASCADE');

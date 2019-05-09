@@ -5,15 +5,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {{> scripts}}
   <title>Document</title>
 </head>
 
 <body>
-  {{#each galleries}}
-  <img src="{{link}}">
-  {{/each}}
-  {{!-- {{username}} --}}
-  <p>view a list of photos</p>
+  {{> nav}}
+  <div id="content">
+    <img class="galleryFeature" src="{{features.link}}">
+    <p>Posted by: {{features.users.username}}</p>
+    <div id="subContent">
+      {{#each galleries}}
+      <a href="/gallery/{{id}}">
+        <img class="otherPhotos" src="{{link}}">
+      </a>
+      {{/each}}
+    </div>
+  </div>
 </body>
 
 </html>

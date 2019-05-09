@@ -5,11 +5,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {{> scripts}}
   <title>Document</title>
 </head>
 
 <body>
-
+  {{> nav}}
+  <div id="content">
+    <a href="/gallery/{{features.id}}">
+      <img class="galleryFeature" src="{{features.link}}">
+    </a>
+    <div id="subContent">
+      {{#each galleries}}
+      <a href="/gallery/{{id}}">
+        <img class="galleryPhotos" src="{{link}}">
+      </a>
+      {{/each}}
+    </div>
+  </div>
 </body>
 
 </html>

@@ -8,7 +8,9 @@ class Gallery extends bookshelf.Model {
     return true;
   }
 
-  // could add a this.belongsTo('User');
+  users() {
+    return this.belongsTo('User');
+  }
 }
 
 module.exports = bookshelf.model('Gallery', Gallery);

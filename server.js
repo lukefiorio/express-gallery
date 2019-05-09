@@ -7,23 +7,29 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const urlParser = bodyParser.urlencoded({ extended: false });
+// redis
+const redis = require('connect-redis')(session);
 // passport
 const passport = require('passport');
 const localStrategy = require('passport-local');
+// encryption
+const bcrypt = require('bcrypt');
 // override
 const methodOverride = require('method-override');
-
-const app = express();
-const PORT = 3000;
 
 // source data
 const gallery = require('./routes/gallery.js');
 const login = require('./routes/login.js');
+const logout = require('./routes/logout.js');
 const register = require('./routes/register.js');
 const user = require('./routes/user.js');
 const User = require('./database/models/User');
 const guard = require('./middleware/guard');
-// const knex = require('./database/knex');
+
+const PORT = 3000;
+const app = express();
+
+require('dotenv').config();
 
 // handlebars
 app.engine('.hbs', exphbs({ extname: '.hbs' }));
@@ -32,14 +38,24 @@ app.set('view engine', '.hbs');
 app.use(express.static('public'));
 app.use(urlParser);
 app.use(cookieParser());
-app.use(session({ secret: 'keyboard cat' }));
 app.use(methodOverride('_method'));
+
+app.use(
+  session({
+    store: new redis({ url: process.env.REDIS_URL }),
+    secret: process.env.REDIS_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  }),
+);
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/gallery', gallery);
 app.use('/register', register);
 app.use('/login', login);
+app.use('/logout', logout);
 app.use('/user', user);
 
 ////
@@ -49,19 +65,19 @@ passport.use(
     return new User({ username: username })
       .fetch()
       .then((user) => {
-        console.log(user);
-
         if (user === null) {
+          // bad username
           return done(null, false, { message: 'bad username or password' });
         } else {
           user = user.toJSON();
-          // happy route
-          if (user.password === password) {
-            return done(null, user);
-            // error route. username exists, pw not matched
-          } else {
-            return done(null, false, { message: 'bad username or password' });
-          }
+          bcrypt.compare(password, user.password).then((res) => {
+            if (res) {
+              return done(null, user);
+            } else {
+              // bad password
+              return done(null, false, { message: 'bad username or password' });
+            }
+          });
         }
       })
       .catch((err) => {
@@ -89,6 +105,11 @@ passport.deserializeUser(function(user, done) {
       username: user.username,
     });
   });
+});
+
+// home page
+app.get('/', (req, res) => {
+  return res.render('main');
 });
 
 const server = app.listen(PORT, () => {

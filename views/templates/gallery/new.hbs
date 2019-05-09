@@ -9,7 +9,30 @@
 </head>
 
 <body>
-
+  {{> nav}}
+  <h3>Please add a photo</h3>
+  <form action="/gallery" method="POST">
+    <div>
+      <label>Title:</label>
+      <input type="text" name="title" required />
+    </div>
+    <div>
+      <label>Author:</label>
+      <input type="text" name="author" required />
+    </div>
+    <div>
+      <label>Link:</label>
+      <input type="url" name="link" required />
+    </div>
+    <div>
+      <label>Description:</label>
+      <input type="text" name="description" required />
+    </div>
+    <div>
+      <input type="submit" value="Add Photo" />
+    </div>
+  </form>
 </body>
+
 
 </html>

@@ -6,9 +6,9 @@ const Gallery = require('../database/models/Gallery');
 router.route('/:id').get((req, res) => {
   User.where({ id: req.user.id })
     .fetch({ withRelated: ['galleries'] })
-    .then(function(user) {
+    .then((result) => {
       const gallery = {
-        galleries: user.related('galleries').toJSON(),
+        galleries: result.related('galleries').toJSON(),
       };
       return res.render('templates/user/index', gallery);
     });

@@ -1,3 +1,29 @@
 @import 'partials/_large';
 @import 'partials/_medium';
 @import 'partials/_small';
+
+.galleryFeature {
+  display: flex;
+  height: 400px;
+  width: 400px;
+}
+
+#Content {
+  display: flex;
+}
+
+#subContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.galleryPhotos {
+  height: 200px;
+  width: 200px;
+}
+
+.otherPhotos {
+  height: 200px;
+  width: 200px;
+}
