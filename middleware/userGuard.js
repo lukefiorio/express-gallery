@@ -1,17 +1,17 @@
 'use strict';
 
 const Gallery = require('../database/models/Gallery');
+const User = require('../database/models/User');
 
 module.exports = function(req, res, next) {
-  console.log(req.params);
-  Gallery.where({ id: req.params.id })
-    .fetch({ withRelated: ['users'] })
+  User.where({ id: req.params.id })
+    .fetch({ withRelated: ['galleries'] })
     .then((result) => {
-      const photoUserId = result.toJSON().user_id;
-      if (req.isAuthenticated() && (photoUserId === req.user.id || req.user.role === 'admin')) {
+      const user = result.toJSON();
+      if (req.isAuthenticated() && (user.id === req.user.id || req.user.role === 'admin')) {
         return next();
       } else {
-        return res.redirect(`/gallery/${req.params.id}`);
+        return res.redirect(`/user/${req.params.id}`);
       }
     });
 };

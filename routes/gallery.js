@@ -6,7 +6,7 @@ const knex = require('../database/knex');
 const User = require('../database/models/User');
 const Gallery = require('../database/models/Gallery');
 const guard = require('../middleware/guard');
-const userGuard = require('../middleware/userGuard');
+const galleryGuard = require('../middleware/galleryGuard');
 
 router
   .route('/')
@@ -27,7 +27,7 @@ router
         return res.render('templates/gallery', gallery);
       });
   })
-  .post((req, res) => {
+  .post(guard, (req, res) => {
     new Gallery()
       .save({
         title: req.body.title,
@@ -48,7 +48,7 @@ router.route('/new').get(guard, (req, res) => {
 
 router
   .route('/:id')
-  .get(guard, (req, res) => {
+  .get((req, res) => {
     const id = Number(req.params.id);
     // fetch all photos
     new Gallery().fetchAll({ withRelated: ['users'] }).then((result) => {
@@ -86,7 +86,7 @@ router
       return res.render('templates/gallery/gallery', resultView);
     });
   })
-  .put((req, res) => {
+  .put(galleryGuard, (req, res) => {
     let updateObj = {};
     if (req.body.title) {
       updateObj.title = req.body.title;
@@ -106,7 +106,6 @@ router
       return res.redirect(`/gallery/${id}/edit`);
     }
 
-    // MUST guard against non-owners editing a photo
     updateObj.user_id = req.user.id;
 
     new Gallery('id', req.params.id).save(updateObj).then((result) => {
@@ -114,7 +113,7 @@ router
       return res.redirect(`/gallery/${req.params.id}`);
     });
   })
-  .delete(userGuard, (req, res) => {
+  .delete(galleryGuard, (req, res) => {
     Gallery.where({ id: req.params.id })
       .destroy()
       .then((result) => {
@@ -122,7 +121,7 @@ router
       });
   });
 
-router.route('/:id/edit').get(userGuard, (req, res) => {
+router.route('/:id/edit').get(galleryGuard, (req, res) => {
   Gallery.where({ id: req.params.id })
     .fetch({ withRelated: ['users'] })
     .then((result) => {
