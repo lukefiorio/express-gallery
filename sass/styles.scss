@@ -1,15 +1,66 @@
+$navHoverColor: lightblue;
+$headerFontFamily: 'Josefin Sans', sans-serif;
+$headerColor: #7c777d;
+
 @import 'partials/_large';
 @import 'partials/_medium';
 @import 'partials/_small';
+
+#navBar {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1%;
+}
+
+.navLink {
+  text-decoration: none;
+}
+
+.nav:hover {
+  background-color: $navHoverColor;
+  cursor: pointer;
+}
+
+#header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  border-top: gray dotted 1px;
+}
+
+#headerTitle {
+  margin: 2% 0%;
+  padding: 2%;
+  border-right: gray dotted 1px;
+  font-family: $headerFontFamily;
+  font-size: 10vw;
+  color: $headerColor;
+}
+
+#headerSlogan {
+  margin: 0;
+  padding: 5% 2%;
+  font-family: $headerFontFamily;
+  font-size: 2vw;
+  color: $headerColor;
+}
+
+#Content {
+  display: flex;
+}
 
 .galleryFeature {
   display: flex;
   height: 400px;
   width: 400px;
-}
-
-#Content {
-  display: flex;
 }
 
 #subContent {
