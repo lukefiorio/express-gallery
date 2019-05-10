@@ -13,7 +13,7 @@ const redis = require('connect-redis')(session);
 const passport = require('passport');
 const localStrategy = require('passport-local');
 // encryption
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 // override
 const methodOverride = require('method-override');
 

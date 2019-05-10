@@ -1,12 +1,13 @@
 version: '3'
 services:
   express-gallery:
+    build: .
     image: lukefiorio/express-gallery:1.0
     env_file: .env
     volumes:
       - ./:/app
     ports:
-      - 3000:3000
+      - '${EXPRESS_HOST_PORT}:${EXPRESS_CONTAINER_PORT}'
     networks:
       - my-app-network
   postgres-primary-db:
