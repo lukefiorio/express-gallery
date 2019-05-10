@@ -1,3 +1,5 @@
+'use strict';
+
 const bookshelf = require('../bookshelf');
 
 require('./Gallery');

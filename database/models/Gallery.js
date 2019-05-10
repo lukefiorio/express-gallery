@@ -1,3 +1,5 @@
+'use strict';
+
 const bookshelf = require('../bookshelf');
 
 class Gallery extends bookshelf.Model {

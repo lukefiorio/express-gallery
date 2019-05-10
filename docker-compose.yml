@@ -1,15 +1,15 @@
 version: '3'
 services:
-  express-gallery:
-    build: .
-    image: lukefiorio/express-gallery:1.0
-    env_file: .env
-    volumes:
-      - ./:/app
-    ports:
-      - '${EXPRESS_HOST_PORT}:${EXPRESS_CONTAINER_PORT}'
-    networks:
-      - my-app-network
+  # express-gallery:
+  #   build: .
+  #   image: lukefiorio/express-gallery:1.0
+  #   env_file: .env
+  #   volumes:
+  #     - ./:/app
+  #   ports:
+  #     - '${EXPRESS_HOST_PORT}:${EXPRESS_CONTAINER_PORT}'
+  #   networks:
+  #     - my-app-network
   postgres-primary-db:
     image: postgres:10.0-alpine
     env_file: .env
