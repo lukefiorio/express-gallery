@@ -6,6 +6,7 @@ const knex = require('../database/knex');
 const User = require('../database/models/User');
 const Gallery = require('../database/models/Gallery');
 const guard = require('../middleware/guard');
+const userGuard = require('../middleware/userGuard');
 
 router
   .route('/')
@@ -47,7 +48,7 @@ router.route('/new').get(guard, (req, res) => {
 
 router
   .route('/:id')
-  .get((req, res) => {
+  .get(guard, (req, res) => {
     const id = Number(req.params.id);
     // fetch all photos
     new Gallery().fetchAll({ withRelated: ['users'] }).then((result) => {
@@ -113,7 +114,7 @@ router
       return res.redirect(`/gallery/${req.params.id}`);
     });
   })
-  .delete((req, res) => {
+  .delete(userGuard, (req, res) => {
     Gallery.where({ id: req.params.id })
       .destroy()
       .then((result) => {
@@ -121,7 +122,7 @@ router
       });
   });
 
-router.route('/:id/edit').get((req, res) => {
+router.route('/:id/edit').get(userGuard, (req, res) => {
   Gallery.where({ id: req.params.id })
     .fetch({ withRelated: ['users'] })
     .then((result) => {
