@@ -1,10 +1,16 @@
 $navHoverColor: lightblue;
 $headerFontFamily: 'Josefin Sans', sans-serif;
+$navFontFamily: 'Baloo Bhai', cursive;
 $headerColor: #7c777d;
 
 @import 'partials/_large';
 @import 'partials/_medium';
 @import 'partials/_small';
+
+body {
+  background-image: url(/../assets/light_wool.png);
+  background-size: cover;
+}
 
 #navBar {
   display: flex;
@@ -21,6 +27,8 @@ $headerColor: #7c777d;
 
 .navLink {
   text-decoration: none;
+  font-size: 3vw;
+  font-family: $navFontFamily;
 }
 
 .nav:hover {
@@ -33,13 +41,13 @@ $headerColor: #7c777d;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  border-top: gray dotted 1px;
+  border-top: lightgray dotted 1px;
 }
 
 #headerTitle {
   margin: 2% 0%;
   padding: 2%;
-  border-right: gray dotted 1px;
+  border-right: lightgray solid 1px;
   font-family: $headerFontFamily;
   font-size: 10vw;
   color: $headerColor;
@@ -53,25 +61,90 @@ $headerColor: #7c777d;
   color: $headerColor;
 }
 
-#Content {
+#galleryContent {
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.galleryFeature {
+#featureContent {
   display: flex;
-  height: 400px;
-  width: 400px;
+  // text-align: center;
+  justify-content: center;
+  padding-bottom: 10px;
+  border-bottom: lightgray solid 1px;
+  width: 95%;
 }
 
-#subContent {
+.featureLink {
+  display: flex;
+  justify-content: center;
+}
+
+.featurePhoto {
+  height: auto;
+  width: 75%;
+}
+
+#subGalleryContent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.subGalleryContainers {
+  position: relative;
+  display: block;
+  height: auto;
+  width: 25%;
+  padding: 2%;
+}
+
+#subDetailContent {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .galleryPhotos {
-  height: 200px;
-  width: 200px;
+  height: auto;
+  width: 100%;
+  margin: 6% 0 12% 0;
+  padding: 0;
+}
+
+.galleryPhotoTitles {
+  position: absolute;
+  bottom: 0;
+  text-shadow: 0 2px white;
+  font-size: 2vw;
+  font-weight: bold;
+  color: $headerColor;
+  overflow: hidden;
+  display: block;
+  height: 5vw;
+  margin: 0 auto;
+  font-size: 2vw;
+  line-height: 1.4;
+  width: 90%;
+  text-decoration: none;
+}
+
+.galleryPhotoTitles:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 90%;
+  height: 2vw;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), #fbfbfb 50%);
+}
+
+.galleryLinks {
+  height: auto;
+  width: 100%;
 }
 
 .otherPhotos {

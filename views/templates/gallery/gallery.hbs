@@ -12,9 +12,10 @@
 <body>
   {{> nav}}
   {{> header}}
-  <div id="content">
-    <img class="galleryFeature" src="{{features.link}}">
-
+  <div id="detailContent">
+    <div id="featureContent">
+      <img class="featurePhoto" src="{{features.link}}">
+    </div>
     <a href="/gallery/{{features.id}}/edit">Modify</a>
 
     <form action="/gallery/{{features.id}}?_method=DELETE" method="post">
@@ -22,7 +23,7 @@
     </form>
 
     <p>Posted by: {{features.users.username}}</p>
-    <div id="subContent">
+    <div id="subDetailContent">
       {{#each galleries}}
       <a href="/gallery/{{id}}">
         <img class="otherPhotos" src="{{link}}">

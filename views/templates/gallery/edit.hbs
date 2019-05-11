@@ -14,9 +14,11 @@
   {{> header}}
   <h3>Please edit your photo</h3>
 
-  <a href="/gallery/{{id}}">
-    <img class="galleryFeature" src="{{link}}">
-  </a>
+  <div id="featureContent">
+    <a href="/gallery/{{id}}">
+      <img class="featurePhoto" src="{{link}}">
+    </a>
+  </div>
   <p>Posted by: {{users.username}}</p>
 
   <div class="submitForm">
