@@ -12,18 +12,18 @@
 <body>
   {{> nav}}
   {{> header}}
-  <h3>Please register as a user</h3>
-  <form action="/register" method="POST">
-    <div>
+  <h3 class="logText">Sign up to make a profile and post your own photos!</h3>
+  <form action="/register" method="POST" class="submitForm">
+    <div class="formRow">
       <label>Username:</label>
       <input type="text" name="username" />
     </div>
-    <div>
+    <div class="formRow">
       <label>Password:</label>
       <input type="password" name="password" />
     </div>
     <div>
-      <input type="submit" value="Register" />
+      <button type="submit" value="Register" class="logSubmit">Register</button>
     </div>
   </form>
 </body>

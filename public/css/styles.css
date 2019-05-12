@@ -13,6 +13,9 @@ body {
   background-image: url(/../assets/light_wool.png);
   background-size: cover; }
 
+a {
+  text-decoration: none; }
+
 #navBar {
   display: flex;
   margin-bottom: 10px;
@@ -25,7 +28,6 @@ body {
   padding: 1%; }
 
 .navLink {
-  text-decoration: none;
   font-size: 3vw;
   font-family: "Baloo Bhai", cursive; }
 
@@ -89,10 +91,136 @@ body {
   width: 25%;
   padding: 2%; }
 
+#detailContent {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-left: 10px; }
+
+#primaryContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 10px;
+  width: 75%; }
+
+#primaryEditContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 10px;
+  width: 100%; }
+
+#detailTitle {
+  font-size: 4vw;
+  font-style: italic; }
+
+.primaryPhoto {
+  height: auto;
+  width: 85%; }
+
+.modifyButtonBox {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0 0 10px;
+  align-items: center;
+  width: 50%; }
+
+form {
+  margin: 0px;
+  display: flex;
+  align-items: center; }
+
+#deleteForm {
+  width: 50%;
+  border: solid lightgray 1px;
+  border-radius: 10%; }
+
+.modifySubBox {
+  display: flex;
+  justify-content: center;
+  width: 50%; }
+
+#deleteForm:hover {
+  background-color: darkred;
+  color: white; }
+
+.modifySubBox:hover {
+  background-color: darkgreen;
+  color: white; }
+
+#deleteButton {
+  width: 100%;
+  border: none;
+  margin: 0; }
+
+.modifyButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  color: inherit;
+  border: solid lightgray 1px;
+  margin-right: 10px;
+  border-radius: 10%;
+  font-size: 3vw;
+  font-family: "Suravaram", serif;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none; }
+
+.detailAttributeBox {
+  margin: 5px 10px; }
+
+.detailAttributes {
+  margin: 0;
+  font-family: "Mukta Vaani", sans-serif;
+  font-size: 2.2vw; }
+
+#detailDescription {
+  font-style: italic; }
+
+#subDetailTitle {
+  font-family: "Mukta Vaani", sans-serif;
+  font-style: italic;
+  font-size: 2.5vw; }
+
+.otherThumbnailBox {
+  margin-bottom: 20px; }
+
+.titleLink {
+  font-family: "Stylish", sans-serif;
+  font-size: 2.5vw;
+  color: #0355b9;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline-block;
+  width: 90%; }
+
+.titleLink:hover {
+  text-decoration: underline;
+  color: cornflowerblue;
+  cursor: pointer; }
+
+.userLink {
+  margin-left: 2%;
+  font-family: "Stylish", sans-serif;
+  font-size: 2.5vw;
+  color: #0355b9; }
+
+.userLink:hover {
+  text-decoration: underline;
+  color: cornflowerblue;
+  cursor: pointer; }
+
 #subDetailContent {
   display: flex;
   flex-direction: column;
-  justify-content: center; }
+  justify-content: center;
+  position: absolute;
+  left: 75%;
+  width: 25%; }
 
 .galleryPhotos {
   height: auto;
@@ -130,5 +258,73 @@ body {
   width: 100%; }
 
 .otherPhotos {
-  height: 200px;
-  width: 200px; }
+  width: 20vw;
+  height: auto; }
+
+.submitForm {
+  display: table;
+  margin: 10px; }
+
+.formRow {
+  display: table-row; }
+
+label {
+  display: table-cell;
+  font-family: "Mukta Vaani", sans-serif;
+  font-size: 2.5vw; }
+
+input {
+  display: table-cell;
+  margin-left: 10px;
+  font-family: "Mukta Vaani", sans-serif;
+  font-size: 2.5vw;
+  width: 25vw; }
+
+.editInput {
+  width: 60vw; }
+
+.logText {
+  font-size: 3vw;
+  font-family: "Mukta Vaani", sans-serif; }
+
+.logSubmit {
+  margin-top: 10px;
+  font-size: 2.5vw;
+  font-family: "Mukta Vaani", sans-serif;
+  width: 15vw; }
+
+#submitModify {
+  margin-top: 10px;
+  background: none;
+  color: inherit;
+  border: solid lightgray 1px;
+  border-radius: 10%;
+  font-size: 3vw;
+  font-family: "Suravaram", serif;
+  padding: 0;
+  cursor: pointer;
+  width: 25vw; }
+
+#deleteModify {
+  margin-left: 10px;
+  background: none;
+  color: inherit;
+  border: solid lightgray 1px;
+  border-radius: 10%;
+  font-size: 3vw;
+  font-family: "Suravaram", serif;
+  padding: 0;
+  cursor: pointer;
+  width: 25vw; }
+
+#deleteModify:hover {
+  background-color: darkred;
+  color: white; }
+
+#submitModify:hover {
+  background-color: darkgreen;
+  color: white; }
+
+#displayEditTitle {
+  font-size: 3vw;
+  font-style: italic; }

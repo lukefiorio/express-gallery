@@ -13,25 +13,25 @@
   {{> nav}}
   {{> header}}
   <h3>Please add a photo</h3>
-  <form action="/gallery" method="POST">
-    <div>
+  <form class="submitForm" action="/gallery" method="POST">
+    <div class="formRow">
       <label>Title:</label>
-      <input type="text" name="title" required />
+      <input class="editInput" type="text" name="title" required />
     </div>
-    <div>
+    <div class="formRow">
       <label>Author:</label>
-      <input type="text" name="author" required />
+      <input class="editInput" type="text" name="author" required />
     </div>
-    <div>
+    <div class="formRow">
       <label>Link:</label>
-      <input type="url" name="link" required />
+      <input class="editInput" type="url" name="link" required />
     </div>
-    <div>
+    <div class="formRow">
       <label>Description:</label>
-      <input type="text" name="description" required />
+      <input class="editInput" type="text" name="description" required />
     </div>
     <div>
-      <input type="submit" value="Add Photo" />
+      <button id="submitModify" type="submit" value="Add Photo">Add Photo</button>
     </div>
   </form>
 </body>

@@ -13,21 +13,39 @@
   {{> nav}}
   {{> header}}
   <div id="detailContent">
-    <div id="featureContent">
-      <img class="featurePhoto" src="{{features.link}}">
+    <div id="primaryContent">
+      <p class="detailAttributes" id="detailTitle">{{features.title}}</p>
+      <img class="primaryPhoto" src="{{features.link}}">
+      <div class="modifyButtonBox">
+        <a href="/gallery/{{features.id}}/edit" class="modifyButtons modifySubBox">Modify</a>
+        <form action="/gallery/{{features.id}}?_method=DELETE" method="post" class="modifySubBox" id="deleteForm">
+          <button type="submit" class="modifyButtons" id="deleteButton">Delete</button>
+        </form>
+      </div>
+      <div class="detailAttributeBox">
+        <span class="detailAttributes">Posted by: </span>
+        <a href="/user/{{features.user_id}}" class="userLink">{{features.users.username}}</a>
+        <p class="detailAttributes">Photo by: {{features.author}}</p>
+        <p class="detailAttributes" id="detailDescription">{{features.description}}</p>
+      </div>
     </div>
-    <a href="/gallery/{{features.id}}/edit">Modify</a>
 
-    <form action="/gallery/{{features.id}}?_method=DELETE" method="post">
-      <button type="submit">Delete</button>
-    </form>
 
-    <p>Posted by: {{features.users.username}}</p>
+
     <div id="subDetailContent">
+      <p id="subDetailTitle">Others you might like...</p>
       {{#each galleries}}
-      <a href="/gallery/{{id}}">
-        <img class="otherPhotos" src="{{link}}">
-      </a>
+      <div class="otherThumbnailBox">
+        <a href="/gallery/{{id}}" class="otherPhotoBox">
+          <img class="otherPhotos" src="{{link}}">
+          <br>
+          <span class="titleLink">{{title}}</span>
+        </a>
+        <div>
+          <span class="detailAttributes">Posted by: </span>
+          <a href="/user/{{user_id}}" class="userLink">{{users.username}}</a>
+        </div>
+      </div>
       {{/each}}
     </div>
   </div>

@@ -12,17 +12,18 @@
 <body>
   {{> nav}}
   {{> header}}
-  <form action="/login" method="post">
-    <div>
+  <h3 class="logText">Sign in to start posting your photos!</h3>
+  <form action="/login" method="post" class="submitForm">
+    <div class="formRow">
       <label>Username:</label>
       <input type="text" name="username" />
     </div>
-    <div>
+    <div class="formRow">
       <label>Password:</label>
       <input type="password" name="password" />
     </div>
     <div>
-      <input type="submit" value="Log In" />
+      <button type="submit" value="Log In" class="logSubmit">Log In</button>
     </div>
   </form>
 </body>
