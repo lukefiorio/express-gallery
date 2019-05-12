@@ -9,7 +9,21 @@ const saltRounds = 12;
 router
   .route('/')
   .get((req, res) => {
-    res.render('templates/register/index');
+    const loggedIn = req.hasOwnProperty('user');
+    let loggedId;
+    let loggedUsername;
+    let loggedRole;
+    if (loggedIn) {
+      (loggedId = req.user.id), (loggedUsername = req.user.username), (loggedRole = req.user.role);
+    } else {
+      (loggedId = false), (loggedUsername = false), (loggedRole = false);
+    }
+    res.render('templates/register/index', {
+      loggedIn: loggedIn,
+      loggedId: loggedId,
+      loggedUsername: loggedUsername,
+      loggedRole: loggedRole,
+    });
   })
   .post((req, res) => {
     bcrypt.genSalt(saltRounds, (err, salt) => {

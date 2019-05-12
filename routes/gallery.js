@@ -18,11 +18,25 @@ router
       })
       .fetchAll()
       .then((result) => {
+        const loggedIn = req.hasOwnProperty('user');
+        let loggedId;
+        let loggedUsername;
+        let loggedRole;
+        if (loggedIn) {
+          (loggedId = req.user.id), (loggedUsername = req.user.username), (loggedRole = req.user.role);
+        } else {
+          (loggedId = false), (loggedUsername = false), (loggedRole = false);
+        }
+
         let fullGallery = result.toJSON();
         const featureGallery = fullGallery.shift();
         const gallery = {
           features: featureGallery,
           galleries: fullGallery,
+          loggedIn: loggedIn,
+          loggedId: loggedId,
+          loggedUsername: loggedUsername,
+          loggedRole: loggedRole,
         };
         return res.render('templates/gallery', gallery);
       });
@@ -43,7 +57,21 @@ router
   });
 
 router.route('/new').get(guard, (req, res) => {
-  return res.render('templates/gallery/new');
+  const loggedIn = req.hasOwnProperty('user');
+  let loggedId;
+  let loggedUsername;
+  let loggedRole;
+  if (loggedIn) {
+    (loggedId = req.user.id), (loggedUsername = req.user.username), (loggedRole = req.user.role);
+  } else {
+    (loggedId = false), (loggedUsername = false), (loggedRole = false);
+  }
+  return res.render('templates/gallery/new', {
+    loggedIn: loggedIn,
+    loggedId: loggedId,
+    loggedUsername: loggedUsername,
+    loggedRole: loggedRole,
+  });
 });
 
 router
@@ -76,11 +104,26 @@ router
         return b.samePoster - a.samePoster;
       });
 
+      // pass user properties if logged in
+      const loggedIn = req.hasOwnProperty('user');
+      let loggedId;
+      let loggedUsername;
+      let loggedRole;
+      if (loggedIn) {
+        (loggedId = req.user.id), (loggedUsername = req.user.username), (loggedRole = req.user.role);
+      } else {
+        (loggedId = false), (loggedUsername = false), (loggedRole = false);
+      }
+
       // keep first 4 photos
       // no error handling if resultArr.length < 4
       const resultView = {
         features: resultArr[0],
         galleries: resultArr.slice(1, 4),
+        loggedIn: loggedIn,
+        loggedId: loggedId,
+        loggedUsername: loggedUsername,
+        loggedRole: loggedRole,
       };
 
       return res.render('templates/gallery/gallery', resultView);
@@ -126,7 +169,26 @@ router.route('/:id/edit').get(galleryGuard, (req, res) => {
     .fetch({ withRelated: ['users'] })
     .then((result) => {
       const photoObj = result.toJSON();
-      return res.render('templates/gallery/edit', photoObj);
+
+      // pass user properties if logged in
+      const loggedIn = req.hasOwnProperty('user');
+      let loggedId;
+      let loggedUsername;
+      let loggedRole;
+      if (loggedIn) {
+        (loggedId = req.user.id), (loggedUsername = req.user.username), (loggedRole = req.user.role);
+      } else {
+        (loggedId = false), (loggedUsername = false), (loggedRole = false);
+      }
+
+      const resultView = {
+        photo: photoObj,
+        loggedIn: loggedIn,
+        loggedId: loggedId,
+        loggedUsername: loggedUsername,
+        loggedRole: loggedRole,
+      };
+      return res.render('templates/gallery/edit', resultView);
     });
 });
 

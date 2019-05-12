@@ -110,7 +110,21 @@ passport.deserializeUser(function(user, done) {
 
 // home page
 app.get('/', (req, res) => {
-  return res.render('main');
+  const loggedIn = req.hasOwnProperty('user');
+  let loggedId;
+  let loggedUsername;
+  let loggedRole;
+  if (loggedIn) {
+    (loggedId = req.user.id), (loggedUsername = req.user.username), (loggedRole = req.user.role);
+  } else {
+    (loggedId = false), (loggedUsername = false), (loggedRole = false);
+  }
+  return res.render('main', {
+    loggedIn: loggedIn,
+    loggedId: loggedId,
+    loggedUsername: loggedUsername,
+    loggedRole: loggedRole,
+  });
 });
 
 const server = app.listen(PORT, () => {

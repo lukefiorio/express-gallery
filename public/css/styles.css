@@ -21,15 +21,50 @@ a {
   margin-bottom: 10px;
   justify-content: center; }
 
+#navigate {
+  display: flex;
+  align-items: left;
+  width: 50%;
+  position: relative;
+  left: 0%; }
+
+#authorize {
+  display: flex;
+  align-items: right;
+  text-align: right;
+  width: 50%;
+  position: relative;
+  left: 0%; }
+
 .nav {
   display: flex;
   justify-content: center;
-  align-items: center;
   padding: 1%; }
+
+.leftNav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  height: 100%;
+  width: 100%;
+  text-align: center; }
+
+.rightNav {
+  margin-left: auto;
+  margin-right: 25px;
+  width: 30%; }
+
+#nav3,
+#nav5 {
+  border-bottom: lightgray dotted 2px; }
 
 .navLink {
   font-size: 3vw;
-  font-family: "Baloo Bhai", cursive; }
+  font-family: "Baloo Bhai", cursive;
+  color: gray;
+  width: 100%;
+  padding: 5%; }
 
 .nav:hover {
   background-color: lightblue;
@@ -40,14 +75,15 @@ a {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  border-top: lightgray dotted 1px; }
+  border-top: lightgray dotted 1px;
+  margin-bottom: 10px; }
 
 #headerTitle {
-  margin: 2% 0%;
+  margin: 2% 0% 0% 0%;
   padding: 2%;
   border-right: lightgray solid 1px;
   font-family: "Josefin Sans", sans-serif;
-  font-size: 10vw;
+  font-size: 8vw;
   color: #7c777d; }
 
 #headerSlogan {
@@ -284,8 +320,9 @@ input {
   width: 60vw; }
 
 .logText {
-  font-size: 3vw;
-  font-family: "Mukta Vaani", sans-serif; }
+  font-size: 2.5vw;
+  font-family: "Mukta Vaani", sans-serif;
+  margin-top: 0; }
 
 .logSubmit {
   margin-top: 10px;

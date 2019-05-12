@@ -7,7 +7,21 @@ const User = require('../database/models/User');
 const passport = require('passport');
 
 router.route('/').get((req, res) => {
-  return res.render('templates/login/index');
+  const loggedIn = req.hasOwnProperty('user');
+  let loggedId;
+  let loggedUsername;
+  let loggedRole;
+  if (loggedIn) {
+    (loggedId = req.user.id), (loggedUsername = req.user.username), (loggedRole = req.user.role);
+  } else {
+    (loggedId = false), (loggedUsername = false), (loggedRole = false);
+  }
+  return res.render('templates/login/index', {
+    loggedIn: loggedIn,
+    loggedId: loggedId,
+    loggedUsername: loggedUsername,
+    loggedRole: loggedRole,
+  });
 });
 
 router.post(

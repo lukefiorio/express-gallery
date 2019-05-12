@@ -10,40 +10,78 @@ const userGuard = require('../middleware/userGuard');
 router.route('/').get(guard, (req, res) => {
   new User()
     .query((qb) => {
-      // sort new photos to the top
-      qb.orderBy('id', 'ASC');
+      // sort users alphabetically
+      qb.orderBy('username', 'ASC');
     })
     .fetchAll()
     .then((result) => {
       const allUsers = result.toJSON();
-      console.log(allUsers);
-      return res.render('templates/user/index', { users: allUsers });
+      const loggedIn = req.hasOwnProperty('user');
+      let loggedId;
+      let loggedUsername;
+      let loggedRole;
+      if (loggedIn) {
+        (loggedId = req.user.id), (loggedUsername = req.user.username), (loggedRole = req.user.role);
+      } else {
+        (loggedId = false), (loggedUsername = false), (loggedRole = false);
+      }
+      return res.render('templates/user/index', {
+        users: allUsers,
+        loggedIn: loggedIn,
+        loggedId: loggedId,
+        loggedUsername: loggedUsername,
+        loggedRole: loggedRole,
+      });
     });
 });
 
 router.route('/:id').get(guard, (req, res) => {
-  // User.where({ id: req.user.id })
   User.where({ id: req.params.id })
     .fetch({ withRelated: ['galleries'] })
     .then((result) => {
+      // const allUsers = result.toJSON();
+      const loggedIn = req.hasOwnProperty('user');
+      let loggedId;
+      let loggedUsername;
+      let loggedRole;
+      if (loggedIn) {
+        (loggedId = req.user.id), (loggedUsername = req.user.username), (loggedRole = req.user.role);
+      } else {
+        (loggedId = false), (loggedUsername = false), (loggedRole = false);
+      }
       const gallery = {
         galleries: result.related('galleries').toJSON(),
+        loggedIn: loggedIn,
+        loggedId: loggedId,
+        loggedUsername: loggedUsername,
+        loggedRole: loggedRole,
       };
-      console.log(gallery);
+
       return res.render('templates/user/detail', gallery);
     });
 });
 
 router.route('/:id/edit').get(userGuard, (req, res) => {
-  // User.where({ id: req.user.id })
-  console.log(req.params.id);
   User.where({ id: req.params.id })
     .fetch({ withRelated: ['galleries'] })
     .then((result) => {
+      const loggedIn = req.hasOwnProperty('user');
+      let loggedId;
+      let loggedUsername;
+      let loggedRole;
+      if (loggedIn) {
+        (loggedId = req.user.id), (loggedUsername = req.user.username), (loggedRole = req.user.role);
+      } else {
+        (loggedId = false), (loggedUsername = false), (loggedRole = false);
+      }
       const gallery = {
         galleries: result.related('galleries').toJSON(),
+        loggedIn: loggedIn,
+        loggedId: loggedId,
+        loggedUsername: loggedUsername,
+        loggedRole: loggedRole,
       };
-      console.log(gallery);
+
       return res.render('templates/user/edit', gallery);
     });
 });
