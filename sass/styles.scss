@@ -384,3 +384,11 @@ input {
   font-size: 3vw;
   font-style: italic;
 }
+
+#userList {
+  font-family: $standardFontFamily;
+  font-size: 3vw;
+  text-decoration: underline;
+  font-style: italic;
+  margin: 0 10px;
+}

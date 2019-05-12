@@ -12,11 +12,13 @@
 <body>
   {{> nav}}
   {{> header}}
-  <p>Your photos</p>
-  {{#each galleries}}
-  <img src="{{link}}">
-  {{/each}}
 
+  <p id="userList">User List:</p>
+  {{#each users}}
+  <div class="userContainers">
+    <a href="/user/{{id}}" class="userLink">{{username}}</a>
+  </div>
+  {{/each}}
 </body>
 
 </html>
