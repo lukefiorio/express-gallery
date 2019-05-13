@@ -110,9 +110,18 @@ router
       let loggedUsername;
       let loggedRole;
       if (loggedIn) {
-        (loggedId = req.user.id), (loggedUsername = req.user.username), (loggedRole = req.user.role);
+        loggedId = req.user.id;
+        loggedUsername = req.user.username;
+        loggedRole = req.user.role;
       } else {
         (loggedId = false), (loggedUsername = false), (loggedRole = false);
+      }
+
+      let owner;
+      if (loggedId === resultArr[0].user_id) {
+        owner = true;
+      } else {
+        owner = false;
       }
 
       // keep first 4 photos
@@ -124,6 +133,7 @@ router
         loggedId: loggedId,
         loggedUsername: loggedUsername,
         loggedRole: loggedRole,
+        owner: owner,
       };
 
       return res.render('templates/gallery/gallery', resultView);

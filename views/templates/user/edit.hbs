@@ -12,10 +12,23 @@
 <body>
   {{> nav}}
   {{> header}}
-  <p>Your photos</p>
-  {{#each galleries}}
-  <img src="{{link}}">
-  {{/each}}
+  <p id="userList">Your photos</p>
+  <div id="subGalleryContent">
+    {{#each galleries}}
+    <div class="subGalleryContainers">
+      <a href="/gallery/{{id}}" class="galleryLinks">
+        <img class="galleryPhotos" src="{{link}}">
+      </a>
+      <a href="/gallery/{{id}}" class="galleryPhotoTitles">{{title}}</a>
+    </div>
+    <div class="modifyButtonBox">
+      <a href="/gallery/{{id}}/edit" class="modifyButtons modifySubBox">Modify</a>
+      <form action="/gallery/{{id}}?_method=DELETE" method="post" class="modifySubBox" id="deleteForm">
+        <button type="submit" class="modifyButtons" id="deleteButton">Delete</button>
+      </form>
+    </div>
+    {{/each}}
+  </div>
 
 </body>
 

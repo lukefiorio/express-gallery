@@ -49,12 +49,21 @@ router.route('/:id').get(guard, (req, res) => {
       } else {
         (loggedId = false), (loggedUsername = false), (loggedRole = false);
       }
+
+      let owner;
+      if (loggedId === Number(req.params.id)) {
+        owner = true;
+      } else {
+        owner = false;
+      }
+
       const gallery = {
         galleries: result.related('galleries').toJSON(),
         loggedIn: loggedIn,
         loggedId: loggedId,
         loggedUsername: loggedUsername,
         loggedRole: loggedRole,
+        owner: owner,
       };
 
       return res.render('templates/user/detail', gallery);

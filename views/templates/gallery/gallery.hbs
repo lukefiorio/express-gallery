@@ -16,12 +16,14 @@
     <div id="primaryContent">
       <p class="detailAttributes" id="detailTitle">{{features.title}}</p>
       <img class="primaryPhoto" src="{{features.link}}">
+      {{#if owner}}
       <div class="modifyButtonBox">
         <a href="/gallery/{{features.id}}/edit" class="modifyButtons modifySubBox">Modify</a>
         <form action="/gallery/{{features.id}}?_method=DELETE" method="post" class="modifySubBox" id="deleteForm">
           <button type="submit" class="modifyButtons" id="deleteButton">Delete</button>
         </form>
       </div>
+      {{/if}}
       <div class="detailAttributeBox">
         <span class="detailAttributes">Posted by: </span>
         <a href="/user/{{features.user_id}}" class="userLink">{{features.users.username}}</a>
